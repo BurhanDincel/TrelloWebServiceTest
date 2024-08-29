@@ -42,15 +42,14 @@ public class TrelloApi {
     }
 
     public Response createCard(String listId, String cardName) {
-        // JSON gövdesi oluştur
         String jsonBody = "{\"name\": \"" + cardName + "\", \"idList\": \"" + listId + "\"}";
 
         return RestAssured.given()
                 .baseUri(BASE_URL)
                 .queryParam("key", KEY)
                 .queryParam("token", TOKEN)
-                .contentType(ContentType.JSON) // Content-Type'ın JSON olduğundan emin olun
-                .body(jsonBody) // JSON gövdesini gönder
+                .contentType(ContentType.JSON)
+                .body(jsonBody)
                 .post("/cards")
                 .then()
                 .extract().response();
